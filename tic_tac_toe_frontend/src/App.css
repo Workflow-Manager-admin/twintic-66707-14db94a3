@@ -1,0 +1,189 @@
+/* Minimalistic, modern, light-theme Tic Tac Toe styling using required color palette */
+
+:root {
+  --ttt-primary: #1976d2;
+  --ttt-secondary: #424242;
+  --ttt-accent: #ffeb3b;
+  --ttt-bg: #fff;
+  --ttt-board-bg: #f8fafb;
+  --ttt-board-border: #424242;
+  --ttt-border-radius: 12px;
+  --ttt-shadow: 0 2px 16px rgba(33,33,33,0.08);
+  --ttt-cell-shadow: 0 1px 6px rgba(66,66,66,0.03);
+  --ttt-x: var(--ttt-primary);
+  --ttt-o: var(--ttt-accent);
+  --ttt-gridline: #d7d7d7;
+  --ttt-disabled: #c2c2c2;
+}
+
+body, html, #root, .App {
+  min-height: 100vh;
+  background: var(--ttt-bg);
+  margin: 0;
+  padding: 0;
+}
+
+.App {
+  font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+  background: var(--ttt-bg);
+  color: var(--ttt-secondary);
+}
+
+/* Board root wrapper */
+.ttt-root {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: var(--ttt-bg);
+  box-shadow: var(--ttt-shadow);
+  border-radius: 20px;
+  min-width: 320px;
+  max-width: 350px;
+  width: 100%;
+  padding: 32px 24px 26px 24px;
+}
+.status-bar {
+  margin-bottom: 24px;
+  font-size: 20px;
+  color: var(--ttt-primary);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  min-height: 32px;
+}
+
+/* Board grid */
+.ttt-board {
+  display: grid;
+  grid-template-columns: repeat(3, 78px);
+  grid-template-rows: repeat(3, 78px);
+  border: 2px solid var(--ttt-board-border);
+  border-radius: var(--ttt-border-radius);
+  background: var(--ttt-board-bg);
+  box-shadow: var(--ttt-cell-shadow);
+}
+
+/* Cell square button */
+.ttt-cell {
+  width: 78px;
+  height: 78px;
+  border: 1.5px solid var(--ttt-board-border);
+  border-radius: 0;
+  background: #fff;
+  outline: none;
+  cursor: pointer;
+  font-size: 38px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.12s;
+  padding: 0;
+  margin: 0;
+  user-select: none;
+}
+
+.ttt-cell[disabled] {
+  cursor: default;
+  color: var(--ttt-disabled);
+  background: #fafafa;
+}
+
+.ttt-board .ttt-cell:nth-child(n+1):nth-child(-n+3) {
+  border-top: none;
+}
+.ttt-board .ttt-cell:nth-child(n+7):nth-child(-n+9) {
+  border-bottom: none;
+}
+.ttt-board .ttt-cell:nth-child(3n+1) {
+  border-left: none;
+}
+.ttt-board .ttt-cell:nth-child(3n) {
+  border-right: none;
+}
+
+/* Cell coloring for X and O */
+.ttt-cell:disabled {
+  opacity: 1 !important;
+}
+
+.ttt-cell {
+  color: var(--ttt-secondary);
+  background: #fff;
+}
+
+.ttt-cell:disabled {
+  color: var(--ttt-disabled);
+}
+
+.ttt-cell:focus {
+  box-shadow: 0 0 0 2px var(--ttt-accent);
+  z-index: 1;
+}
+
+.ttt-cell[data-testid*="cell-"]:not([disabled]) {
+  transition: background 0.16s;
+}
+.ttt-cell[data-testid*="cell-"]:not([disabled]):hover {
+  background: #f3fafe;
+}
+
+.ttt-cell:after {
+  content: '';
+}
+
+/* Reset button */
+.ttt-reset {
+  margin-top: 22px;
+  padding: 10px 0;
+  width: 100%;
+  background: var(--ttt-primary);
+  color: #fff;
+  font-size: 17px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  outline: none;
+  box-shadow: 0 1.5px 6px rgba(25, 118, 210, 0.11);
+  cursor: pointer;
+  transition: background 0.22s;
+}
+
+.ttt-reset:hover,
+.ttt-reset:focus {
+  background: #1156a4;
+}
+
+.ttt-credit {
+  margin-top: 14px;
+  font-size: 12.7px;
+  color: #a6a6a6;
+  text-align: center;
+  user-select: none;
+}
+
+/* Responsive for mobile */
+@media (max-width: 500px) {
+  .ttt-root {
+    min-width: 0;
+    max-width: 97vw;
+    padding: 15px 2vw 13px 2vw;
+  }
+  .ttt-board {
+    grid-template-columns: repeat(3, 21vw);
+    grid-template-rows: repeat(3, 21vw);
+    min-width: 0;
+    width: 97vw;
+    max-width: 97vw;
+  }
+  .ttt-cell {
+    width: 21vw;
+    height: 21vw;
+    font-size: 8.8vw;
+  }
+  .ttt-reset {
+    font-size: 14px;
+    padding: 9px 0;
+  }
+}
+
